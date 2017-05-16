@@ -1,19 +1,14 @@
-import {Greeter} from "./app/greeter";
 
-const greeter = new Greeter("world");
-
-document.body.innerHTML = greeter.getGreeting();
-/*
 let vnos = prompt("Vnesi stevilo!");
 let i:number;
 for ( i=1; i <= Number(vnos); i++)
 {
-    if (i%3 === 0 && i%5===0) console.log("fizzbuzz");
-    else if (i%3===0) console.log("fizz");
-    else if (i%5===0) console.log("buzz");
+    if (i%3 === 0 && i%5 === 0) console.log("fizzbuzz");
+    else if (i%3 === 0) console.log("fizz");
+    else if (i%5 === 0) console.log("buzz");
     else console.log(i);
 }
-*/
+
 
 
 /*********************************************/
