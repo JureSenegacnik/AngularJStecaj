@@ -41,24 +41,28 @@
     
 </div>-->
 <p>Wash the laundry: add items to wash</p>
-<div ng-init="Items" =[ item:'Miha',item:'Joze', item:'Janez']>
-<ul>
-    <li ng-repeat="item in Items">{{persons}}</li>
-</ul>
+
 
 </div>
 <div ng-controller="MainController as $todoCtrl">
     <p><input type="checkbox" ng-model="showcomplete">Show completed</p>
-    <p><button class="btn btn-primary" ng-click="$todoCtrl.removecompleted($todoCtrl.tasks)">Remove Completed</button></p>
+    <p>
+        <button class="btn btn-primary" ng-click="$todoCtrl.removecompleted($todoCtrl.tasks)">
+            Remove Completed
+        </button>
+    </p>
     <input type="text" class="form-control" ng-model="$todoCtrl.name">
-    <button class="btn btn-primary" ng-click="$todoCtrl.add($todoCtrl.name)">Add</button>
+    <button class="btn btn-primary" ng-click="$todoCtrl.add($todoCtrl.name)">
+        Add
+    </button>
         
-<ol>
-    <li ng-repeat = "task in $todoCtrl.tasks">
-        <span ng-if="showcomplete && task.completion || !task.completion">
-        <span ng-style="task.completion&& {'text-decoration':'line-through'}">{{task}}</span>
-        </span><input type="checkbox" ng-model="task.completion"></li>
-</ol>
+    <ol>
+        <li ng-repeat = "task in $todoCtrl.tasks">
+            <span ng-if="showcomplete && task.completion || !task.completion" ng-style="task.completion && {'text-decoration':'line-through'}"> 
+                {{task}}           
+            </span><input type="checkbox" ng-model="task.completion">
+        </li>
+    </ol>
 </div>
 
 <script src="js/bundle.js"></script>
