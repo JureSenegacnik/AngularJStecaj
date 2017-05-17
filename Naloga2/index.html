@@ -1,0 +1,67 @@
+<!doctype html>
+<html class="no-js" lang="", ng-app="comtrade"> <!--- ng app je za incldanje! -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Typescript basic setup</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!--
+<p>This will be changed out by typescript.</p>
+<p>{{5 +5}}</p>  -->
+
+
+<!-- ng models -->
+<!--<input type="text" ng-model="data">
+<p>{{data}}</p>
+
+<input type="checkbox" ng-model="boxek">
+<p>{{boxek}}</p>-->
+
+<!-- ng-show, ng-hide, ng-if-->
+<!---<p ng-show="boxek"> Visible when true </p>
+<p ng-hide="boxek"> Visible when false </p>
+<p ng-if="boxek"> Same as g-show but removes from DOM </p>
+
+<div ng-init="persons" =['Miha', 'Joze', 'Janez']>
+<ul>
+    <li ng-repeat="person in persons">{{persons}}</li>
+</ul>
+
+</div>
+<div ng-controller="MainController as $Mainctrl">
+    <p>{{$Mainctrl.foo}}</p>
+    <button ng-click="$addCtrl.fire()">Fire</button>
+    
+</div>-->
+<p>Wash the laundry: add items to wash</p>
+<div ng-init="Items" =[ item:'Miha',item:'Joze', item:'Janez']>
+<ul>
+    <li ng-repeat="item in Items">{{persons}}</li>
+</ul>
+
+</div>
+<div ng-controller="MainController as $todoCtrl">
+    <p><input type="checkbox" ng-model="showcomplete">Show completed</p>
+    <p><button class="btn btn-primary" ng-click="$todoCtrl.removecompleted($todoCtrl.tasks)">Remove Completed</button></p>
+    <input type="text" class="form-control" ng-model="$todoCtrl.name">
+    <button class="btn btn-primary" ng-click="$todoCtrl.add($todoCtrl.name)">Add</button>
+        
+<ol>
+    <li ng-repeat = "task in $todoCtrl.tasks">
+        <span ng-if="showcomplete && task.completion || !task.completion">
+        <span ng-style="task.completion&& {'text-decoration':'line-through'}">{{task}}</span>
+        </span><input type="checkbox" ng-model="task.completion"></li>
+</ol>
+</div>
+
+<script src="js/bundle.js"></script>
+</body>
+</html>
+
