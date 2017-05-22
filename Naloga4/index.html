@@ -1,0 +1,191 @@
+<!doctype html>
+<html class="no-js" lang="" ng-app="comtrade">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Typescript basic setup</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 well">
+            <div ng-controller="MainController as $mainCtrl">
+                <button class="btn btn-primary" ng-click="$mainCtrl.getHttp()">Get vehicles</button>
+                
+                
+                   <!-- Data from server: {{ $mainCtrl.data}}    -->      
+               
+                   
+                <hr>
+                Select vehicle
+                <form name="selectvehicle" novalidate>
+                <ul>
+                    <li ng-repeat=" car in $mainCtrl.data">
+                        {{car.id}} {{ car.name  }}
+                       <!--<img data-ng-src="{{car.image}}">-->
+                       <input type="radio" name="selectedCar" ng-model="$parent.selectedCar" ng-value="{{car.id}}"><br>
+                    </li>
+                </ul>
+                <p>Selected car: {{selectedCar}} </p>
+                {{data}}
+                <p> Please select also when to rent it:  </p>
+                 
+                <ol>
+                    <li ng-repeat="slot in $mainCtrl.timeslots track by $index" ng-if="slot.carId == selectedCar" >
+                     
+                        
+                        <ul >
+                            <input type="radio" name="selectedRental" ng-model="$parent.$parent.selectedRental" ng-value="{{slot.id}} ">
+                            <li>Ticket ID: {{slot.id}}</li>
+                            <li>Date of rental: {{slot.date}}</li>
+                            <li>Time of rental: {{slot.time}}</li>
+                            <li>Duration of rental: {{slot.duration}}</li>
+                            <li>email:{{slot.contactEmail}} </li>
+                        </ul>
+                   
+                        
+                       <!--<input type="radio" name="carId" id="carId" value="data1.id">-->
+                    </li>
+                    Selected rental:{{selectedRental}}
+                </ol>
+                <button class="btn btn-primary" ng-click="$mainCtrl.postHttp()">Reserve</button>
+                {{timeslots}}
+              </form>
+              <!---{{$mainCtrl.timeslots}}-->
+              
+              <!--  <ol>
+                    <li ng-repeat="tslot in $mainCtrl.timeslots">
+                        {{ tslot  }}
+                    </li>
+                </ol>
+               -->
+                <!-- Dropdowns -->
+              <!-- <p>Gender</p>
+                  <select class="form-control" ng-model="selectedGender" ng-options="person.gender for person in $mainCtrl.people" ng-required="true"></select>
+                  
+                <p>{{ selectedGender }}</p> 
+
+                <form name="exampleForm" novalidate>
+
+
+                
+                    <p>Your email: {{email}}
+                        <input name="email" type="email" class="form-control" ng-model="email" ng-required="true">
+                    </p>
+                    <p ng-if="exampleForm.email.$error.required && exampleForm.email.$touched" class="text-danger">Email required.</p>
+                    <p ng-if="exampleForm.email.$error.email && exampleForm.email.$touched" class="text-danger">This is not email.</p>
+
+                    <p>Your username: {{username}}
+                        <input name="username" type="text" class="form-control" ng-model="username" ng-required="true" >
+                    </p>
+                    
+
+                    <p>Your password
+                        <input name="password" type="password" class="form-control" ng-model="password" ng-minlength="3">
+                    </p>
+
+                    <p>Your website {{url}}
+                        <input name="url" type="text" class="form-control" ng-model="url">
+                    </p>
+
+                   
+                    <p>Your sallary is: {{ data4 | currency: '€': 2 }}
+                        <input name="sallary" type="number" class="form-control" ng-model="sallary">
+                    </p>
+           
+                    
+                    <p>What went wrong
+                        <input name="errorReport" type="text" class="form-control" ng-model="errorReport" ng-required="true" ng-maxlength="1000">
+                    </p>
+                    <p ng-if="exampleForm.errorReport.$error.required && exampleForm.errorReport.$touched" class="text-danger">Write what went wrong.</p>
+                    
+                    <p>Time of error: {{ timeOfError }}
+                        <input name="timeOfError" type="datetime-local" class="form-control" ng-model="timeOfError">
+                    </p>
+
+                    <p>Until which date do you want us to fix that: {{ deadline }}
+                        <input name="deadline" type="date" class="form-control" ng-model="deadline">
+                    </p>
+
+                    <p>How much do you offer to fix it: {{ youOffered | currency: '€': 2 }}
+                        <input name="youOffered" type="number" class="form-control" ng-model="youOffered", ng-min="50" ng-required="true">
+                    </p>
+                    <p ng-if="exampleForm.youOffered.$error.required && exampleForm.youOffered.$touched" class="text-danger">You need to make an offer.</p>
+                    <p ng-if="exampleForm.youOffered.$error.min && exampleForm.youOffered.$touched" class="text-danger">You do not offer enough.</p>
+
+                    <p>Check this if you agree to our terms: {{ agreement }}
+                        <input name="agreement" type="checkbox" class="form-control" ng-model="agreement" ng-required="true" >
+                    </p>
+                    <p ng-if="exampleForm.agreement.$checked && exampleForm.agreement.$touched" class="text-danger">You need to agree.</p>
+
+                    <p>Payment method {{paymentMethod}}<br>
+                        <input type="radio" name="paymentMethod" value="creditcard"> Credit card<br>
+                        <input type="radio" name="paymentMethod" value="account"> Wire transfer to our account<br>
+                        <input type="radio" name="paymentMethod" value="cash"> Cash in envelope<br>
+                    </p>
+
+                    <ul>
+                        <li ng-repeat="(key, errors) in exampleForm.$error track by $index"> <strong>{{ key }}</strong> errors
+                            <ul>
+                            <li ng-repeat="e in errors" >{{ e.$name }} has an error: <strong>{{ key }}</strong>.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <button ng-disabled="!exampleForm.$valid" class="btn btn-primary">Submit</button>
+                    </form>    --> 
+                    a
+                    <!--      <input type="text" class="form-control" ng-model="data2" ng-minlength="3">
+                    <input type="text" class="form-control" ng-model="data2" ng-maxlength="13">
+                    <input type="text" class="form-control" ng-model="data2" ng-trim="true">
+                    <input type="text" class="form-control" ng-model="data2" ng-pattern="/d"> -->
+
+                    <!--
+                    <p ng-if="!exampleForm.email.$valid" class="text-danger">You need to have an email.</p>
+                    <p ng-if="exampleForm.email.$error.required" class="text-danger">This is required.</p>
+                    <p ng-if="exampleForm.email.$error.email" class="text-danger">This should be an email.</p>
+                    <p class="text-danger">{{ exampleForm.email.$error }}</p>
+                    -->
+
+                    <!-- Adv. showing of error -->
+                    <!--     <p ng-if="exampleForm.email.$dirty">I am dirty.</p>
+                    <p ng-if="exampleForm.email.$pristine">I am prisitine.</p>
+                    <p ng-if="exampleForm.email.$touched">I am touched.</p>
+                    <p ng-if="exampleForm.email.$untouched">I am untouched.</p>
+                    <p ng-if="exampleForm.email.$error.required && exampleForm.email.$dirty" class="text-danger">This is required.</p>
+                        -->
+
+                   
+
+
+                    <!-- Filter -->
+                    <!--<input type="text" class="form-control" ng-model="itemFilter">
+
+                    <ul>
+
+                        <li ng-repeat="item in $mainCtrl.strings | filter: itemFilter ">{{ item }}</li>
+                    </ul> -->
+
+                        <!--<p>form valid: {{ exampleForm.$valid }}</p>  -->
+                    
+                
+                
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/bundle.js"></script>
+</body>
+</html>
