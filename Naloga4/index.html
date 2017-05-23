@@ -27,12 +27,12 @@
                    
                 <hr>
                 Select vehicle
-                <form name="selectvehicle" novalidate>
+                <form name="selectvehicle" ng-submit="$mainCtrl.postHttp(selectedRental,$mainCtrl.timeslots[selectedRental].contactEmail)" novalidate>
                 <ul>
                     <li ng-repeat=" car in $mainCtrl.data">
                         {{car.id}} {{ car.name  }}
                        <<img data-ng-src="{{car.image}}">
-                       <input type="radio" name="selectedCar" ng-model="$parent.selectedCar" ng-value="{{car.id}}"><br>
+                       <input type="radio" name="selectedCar" ng-model="$parent.selectedCar" ng-value="{{car.id}}" required><br>
                     </li>
                 </ul>
                 <p>Selected car: {{selectedCar}} </p>
@@ -44,7 +44,7 @@
                      
                         
                         <ul >
-                            <input type="radio" name="selectedRental" ng-model="$parent.$parent.selectedRental" ng-value="{{slot.id}} ">
+                            <input type="radio" name="selectedRental" ng-model="$parent.$parent.selectedRental" ng-value="{{slot.id}}" required>
                             <li>Ticket ID: {{slot.id}}</li>
                             <li>Date of rental: {{slot.date}}</li>
                             <li>Time of rental: {{slot.time}}</li>
@@ -60,9 +60,9 @@
                 
                 <!--<button class="btn btn-primary" ng-click="$mainCtrl.postHttp({ contactId : "selectedRental",email : "$mainCtrl.timeslots.selectedRental.contactEmail"})">Reserve</button>-->
 
-                    <button class="btn btn-primary" ng-click="$mainCtrl.postHttp(selectedRental,$mainCtrl.timeslots[selectedRental].contactEmail)">Reserve</button>
-                    
-                    {contactId: '{{selectedRental}}', nameToMatch: '$mainCtrl.timeslots.selectedRental.contactEmail'}
+                   
+                    contactId: '{{selectedRental}}', nameToMatch: {{$mainCtrl.timeslots.selectedRental.contactEmail}}
+                    <button type="submit" ng-disabled="!selectvehicle.$valid" class="btn btn-primary">Submit</button>
               </form>
               <!---{{$mainCtrl.timeslots}}-->
               

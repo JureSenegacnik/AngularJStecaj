@@ -2,7 +2,7 @@ export class MainController {
     data = '';
     timeslots = 'none';
     static $inject = ['$q', '$http'];
-    reservation=[];
+
     
 
     constructor(private $q: ng.IQService, private $http: ng.IHttpService) {
@@ -35,14 +35,17 @@ export class MainController {
              "email":"this.timeslots.selectedRental.contactEmail" 
         }];*/
         
-        this.reservation.push({'timeslotId': selectedRental});
-        this.reservation.push({'email': mail});
         
-        let  parameter = JSON.stringify(this.reservation);
-        alert(parameter);
+        let postObject = {
+            email: mail,
+            timeslotId: selectedRental
+        };
+
+
+        //alert(postObject);
         //alert(mail);
         //this.timeslots[selectedRental].contactEmail;
-        this.$http.post('http://smartninja.betoo.si/api/CMW/reservations', this.reservation)
+        this.$http.post('http://smartninja.betoo.si/api/CMW/reservations', postObject)
             .then((success: any) => {
                     console.log(success);
                 }, (error: any) => {
