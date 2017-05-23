@@ -49,16 +49,20 @@
                             <li>Date of rental: {{slot.date}}</li>
                             <li>Time of rental: {{slot.time}}</li>
                             <li>Duration of rental: {{slot.duration}}</li>
-                            <li>email:{{slot.contactEmail}} </li>
+                            <li>email:<span ng-model="$parent.mail">{{slot.contactEmail}}</span></li>
                         </ul>
                    
                         
                        <!--<input type="radio" name="carId" id="carId" value="data1.id">-->
                     </li>
-                    Selected rental:{{selectedRental}}
+                    Selected rental:{{selectedRental}} {{$mainCtrl.timeslots[selectedRental].contactEmail}} {{mail}}
                 </ol>
-                <button class="btn btn-primary" ng-click="$mainCtrl.postHttp()">Reserve</button>
-                {{timeslots}}
+                
+                <!--<button class="btn btn-primary" ng-click="$mainCtrl.postHttp({ contactId : "selectedRental",email : "$mainCtrl.timeslots.selectedRental.contactEmail"})">Reserve</button>-->
+
+                    <button class="btn btn-primary" ng-click="$mainCtrl.postHttp(selectedRental,$mainCtrl.timeslots[selectedRental].contactEmail)">Reserve</button>
+                    
+                    {contactId: '{{selectedRental}}', nameToMatch: '$mainCtrl.timeslots.selectedRental.contactEmail'}
               </form>
               <!---{{$mainCtrl.timeslots}}-->
               

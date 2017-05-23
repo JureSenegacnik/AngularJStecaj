@@ -25,12 +25,23 @@ export class MainController {
                 }
             );
     }
-    postHttp(){
+    postHttp(selectedRental, mail){ 
+        
+        /*alert(selectedRental);
+        alert(mail);
          this.reservation = [
         {
             "timeslotId": "selectedRental",
              "email":"this.timeslots.selectedRental.contactEmail" 
-        }];
+        }];*/
+        
+        this.reservation.push({'timeslotId': selectedRental});
+        this.reservation.push({'email': mail});
+        
+        let  parameter = JSON.stringify(this.reservation);
+        alert(parameter);
+        //alert(mail);
+        //this.timeslots[selectedRental].contactEmail;
         this.$http.post('http://smartninja.betoo.si/api/CMW/reservations', this.reservation)
             .then((success: any) => {
                     console.log(success);
@@ -41,22 +52,7 @@ export class MainController {
 
 
     }
-    /*getSlots() {
-        this.$http.get('http://smartninja.betoo.si/api/CMW/timeslots')
-            .then((success: any) => {
-                    this.timeslots = success.data;
-                }, (error: any) => {
-                    console.log(error);
-                }
-            );
-            
-
-        // only one radio can be logically checked, don't check the rest
-        
-    }*/
-    
-
-
+ 
     fire() {
         let initialHttpRequest = this.getDummyPromise();
 
