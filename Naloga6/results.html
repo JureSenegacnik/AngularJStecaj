@@ -1,0 +1,12 @@
+
+<div ng-init="points=2">
+<p><input type="radio"  ng-model="points" ng-value="1">1</p>
+<p><input type="radio"  ng-model="points" ng-value="2" checked="checked">2</p>
+<p><input type="radio"  ng-model="points" ng-value="3">3</p>
+</div>
+ 
+<p>
+<button class="btn btn-primary" ng-click="team.add(points)">Add score</button>
+</p>
+<span class="label label-primary">Score: {{team.scoresum}}</span>
+

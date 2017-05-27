@@ -1,0 +1,8 @@
+
+
+<input type="text" ng-model="$ctrl.tekst">
+<p>Entered text(please write more than 5 characters):
+    <pre ng-class="$ctrl.tekst.length > 5 ? 'text-success' : 'text-danger'">
+        {{$ctrl.tekst}}
+    </pre>
+</p>
