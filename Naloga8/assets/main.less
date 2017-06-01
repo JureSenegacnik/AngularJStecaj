@@ -1,0 +1,91 @@
+@import "../../bower_components/bootstrap/less/bootstrap";
+
+.main {
+  color: red;
+}
+
+#footer
+{
+  color:blue;
+}
+
+//variables
+@brand-primary: red;
+
+@import "_bg";
+
+.btn-primary{
+  background: @brand-primary;
+}
+
+//mixins
+.bordered
+{
+  border: solid 2px @brand-primary;
+}
+
+.bordered-large
+{
+  .bordered;
+  .border-radius(50%);
+  padding: 1rem; 
+}
+
+.border-radius(@radius)
+{
+  border-radius: @radius;
+}
+
+@my-selector: panel;
+
+.@{my-selector}
+{
+  padding: 2rem;
+  .bordered;
+}
+
+//math
+@small:0.5rem;
+@normal: @small*2;
+.math
+{
+  padding: calc(20px+20px); //css implementation- not good
+  margin: @normal; //less implementation
+}
+
+//Nesting
+//useful for BEM BLock Element modifyer
+/*
+.form
+{
+
+}
+
+.form .form-control
+{
+
+}*/
+//this can get messy -upper, so look down)
+//partial less files should start with underscore _
+.form
+{
+  &-login
+  {
+    padding: 50px;
+  }
+  .form-control
+  {
+    margin: 2px;
+    /*.form-control-succeed //bad way
+    {
+      color:green;
+    } bad way*/
+    &-succeed //good way
+    {
+      color:darkorange;
+    }
+  }
+  
+}
+
+@import "_buttons";

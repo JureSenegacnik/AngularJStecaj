@@ -1,0 +1,82 @@
+@succeedbtn: green;
+@succeedbtnhover:darkgreen;
+@warningbtn:orange;
+@warningbtnhover:darkorange;
+@btntext: cyan;
+@btnhover: darkcyan;
+@bordercolor: black;
+@dangerbtn:red;
+@dangerbtnhover:darkred;
+@primarybtn:blue;
+@primarybtnhover:darkblue;
+@defaultbtn:#bbbbbb;
+@defaultbtnhover:#dddddd;
+
+.button
+{
+  box-shadow: 7px 7px 5px #888888;
+  text-align: center;
+  border-color: @bordercolor;
+  border-radius: 10px;
+  padding:5px;
+  margin:7px;
+  //border:5px solid;
+  //color:@bordercolor;
+  color:@btntext;
+  &:hover
+    {
+      color:@btnhover;
+      box-shadow: 3px 3px 5px #555555;
+    }
+  &-succeed
+  {
+    background-color: @succeedbtn;
+    &:hover
+    {
+      background-color: @succeedbtnhover;
+    }
+    
+  }
+
+  &-warning
+  {
+    background-color: @warningbtn;
+    
+    &:hover
+    {
+      background-color: @warningbtnhover;
+    }
+  }
+  &-danger
+  {
+    background-color: @dangerbtn;
+    
+    &:hover
+    {
+      background-color: @dangerbtnhover;
+    }
+  }
+  &-primary
+  {
+    background-color: @primarybtn;
+    
+    &:hover
+    {
+      background-color: @primarybtnhover;
+    }
+  }
+  &-default
+  {
+    background-color: @defaultbtn;
+    //color:blue;
+    &:hover
+    {
+      background-color: @defaultbtnhover;
+    }
+  }
+  /*&-succeed:hover
+  {
+    background-color: darkgreen;
+    color:violet;
+  }*/
+}
