@@ -1,0 +1,88 @@
+<html>
+<head><title>Hello world!</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body ng-app="app">
+<div ng-controller="Controller2 as $mainCtrl">
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            
+            <div class="well">
+                <!-- Navbar -->
+                <a ui-sref="home">Home</a>
+                <a ui-sref="login">Login</a>
+                <a ui-sref="error">Error</a>
+                <a ui-sref="parent">Parent</a>
+
+                <!-- Linking to nested state -->
+                <a ui-sref="parent.child">Nested state</a>
+
+                <!-- Linking to a state with added parameters -->
+                <a ui-sref="parameter({name: $mainCtrl.data})">Go to state and pass Bob</a>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Load all templates and templateUrls from states into this directive -->
+<div class="well">
+    <ui-view></ui-view>
+</div>
+
+                <button class="btn btn-primary" ng-click="$mainCtrl.getHttp()">Get vehicles</button>
+                
+                
+                   <!-- Data from server: {{ $mainCtrl.data}}    -->      
+               
+                   
+                <hr>
+                Select vehicle
+                <!--<form name="selectvehicle" ng-submit="$mainCtrl.postHttp(selectedRental,$mainCtrl.timeslots[selectedRental].contactEmail)" novalidate>-->
+                <form name="selectvehicle" ng-submit="$mainCtrl.view(selectedCar)" novalidate>
+                <ul>
+                    <li ng-repeat=" car in $mainCtrl.data">
+                        {{car.id}} {{ car.name  }}
+                       <!--<img data-ng-src="{{car.image}}">-->
+                       <input type="radio" name="selectedCar" ng-model="$parent.selectedCar" ng-value="{{car.id}}" required><br>
+                    </li>
+                </ul>
+                <p>Selected car: {{selectedCar}} </p>
+                <!--<button class="btn btn-primary" ng-click=$mainCtrl.view()>View details</button>-->
+                {{data}}
+                <a ui-sref="parameter({name:selectedCar})">View details</a>
+                {{$mainCtrl.data[[selectedCar-1]]}}
+                <img data-ng-src="{{$mainCtrl.data[[selectedCar-1]].image}}">
+                <!--<p> Please select also when to rent it:  </p>
+                 
+                <ol>
+                    <li ng-repeat="slot in $mainCtrl.timeslots track by $index" ng-if="slot.carId == selectedCar" >
+                     
+                        
+                        <ul >
+                            <input type="radio" name="selectedRental" ng-model="$parent.$parent.selectedRental" ng-value="{{slot.id}}" required>
+                            <li>Ticket ID: {{slot.id}}</li>
+                            <li>Date of rental: {{slot.date}}</li>
+                            <li>Time of rental: {{slot.time}}</li>
+                            <li>Duration of rental: {{slot.duration}}</li>
+                            <li>email:<span ng-model="$parent.mail">{{slot.contactEmail}}</span></li>
+                        </ul>
+                   
+                        
+                  
+                    </li>
+                    Selected rental:{{selectedRental}} {{$mainCtrl.timeslots[selectedRental].contactEmail}} {{mail}}
+                </ol>-->
+                
+                <!--<button class="btn btn-primary" ng-click="$mainCtrl.postHttp({ contactId : "selectedRental",email : "$mainCtrl.timeslots.selectedRental.contactEmail"})">Reserve</button>-->
+
+                   
+                    <!--contactId: '{{selectedRental}}', nameToMatch: {{$mainCtrl.timeslots.selectedRental.contactEmail}}
+                    <button type="submit" ng-disabled="!selectvehicle.$valid" class="btn btn-primary">Submit</button>-->
+                </form>
+            </div>
+<script src="js/app.js"></script>
+</body>
+</html>
