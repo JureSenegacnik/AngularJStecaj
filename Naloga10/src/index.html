@@ -1,0 +1,45 @@
+<html>
+<head><title>Hello world!</title>
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body ng-app="app">
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="well">
+                <!-- Navbar -->
+                <a ui-sref="home">Home</a>
+                <a ui-sref="login">Login</a>
+                <a ui-sref="error">Error</a>
+                <a ui-sref="parent">Parent</a>
+
+                <!-- Linking to nested state -->
+                <a ui-sref="parent.child">Nested state</a>
+
+                <!-- Linking to a state with added parameters -->
+                <a ui-sref="parameter({name: 'Bob'})">Go to state and pass Bob</a>
+            </div>
+
+        </div>
+    </div>
+    <div ng-controller="TestController as $mainCtrl">
+        <form name="exampleForm" novalidate>
+             <input name="numbr" type="number" class="form-control" ng-model="numbr">
+             <button class="btn btn-primary" ng-click="$mainCtrl.fizzy(numbr)">Fizzbuzz</button>
+        </form>
+        {{$mainCtrl.table}}
+    </div>
+    
+</div>
+
+<!-- Load all templates and templateUrls from states into this directive -->
+<div class="well">
+    <ui-view></ui-view>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
