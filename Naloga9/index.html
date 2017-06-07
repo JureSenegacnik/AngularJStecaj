@@ -18,8 +18,8 @@
                 <!-- Linking to nested state -->
                 <a ui-sref="parent.child">Nested state</a>
 
-                <!-- Linking to a state with added parameters -->
-                <a ui-sref="parameter({name: $mainCtrl.data})">Go to state and pass Bob</a>
+                <!-- Linking to a state with added cars -->
+                <a ui-sref="car({name: $mainCtrl.data})">Go to state and pass Bob</a>
                 
             </div>
 
@@ -29,7 +29,7 @@
 
 <!-- Load all templates and templateUrls from states into this directive -->
 <div class="well">
-    <ui-view></ui-view>
+    <ui-view></ui-view> 
 </div>
 
                 <button class="btn btn-primary" ng-click="$mainCtrl.getHttp()">Get vehicles</button>
@@ -52,9 +52,13 @@
                 <p>Selected car: {{selectedCar}} </p>
                 <!--<button class="btn btn-primary" ng-click=$mainCtrl.view()>View details</button>-->
                 {{data}}
-                <a ui-sref="parameter({name:selectedCar})">View details</a>
-                {{$mainCtrl.data[[selectedCar-1]]}}
-                <img data-ng-src="{{$mainCtrl.data[[selectedCar-1]].image}}">
+                <button class="btn btn-primary" ng-click="$mainCtrl.view(selectedCar)" ui-sref="car({name:selectedCar})">
+                    View details
+                </button>
+               {{$mainCtrl.dataService.bar}}
+               <img data-ng-src="{{$mainCtrl.dataService.bar.image}}">
+                <!--{{$mainCtrl.data[[selectedCar-1]]}}-->
+                
                 <!--<p> Please select also when to rent it:  </p>
                  
                 <ol>

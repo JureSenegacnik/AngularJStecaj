@@ -1,6 +1,7 @@
 import * as angular from 'angular';
+import IScope = angular.IScope;
 import 'angular-ui-router';
-import {Controller2} from './app/Controller2';
+import {Controller2,DataService} from './app/Controller2';
 //const myApp = angular.module('comtrade',[]).controller('Controller2', Controller2) ;
 
 interface MainControllerStateParams extends ng.ui.IStateParamsService
@@ -10,20 +11,24 @@ interface MainControllerStateParams extends ng.ui.IStateParamsService
 
 class MainController 
 {
-    
+    static $inject = ['DataService','$q', '$http'];
     name: string;
-    constructor($stateParams: MainControllerStateParams, $state: ng.ui.IStateService,
+    constructor(public dataService: DataService, $stateParams: MainControllerStateParams, $state: ng.ui.IStateService,
     private $q: ng.IQService, private $http: ng.IHttpService)
     {
         this.name = $stateParams.name;
-        console.log($state.is('parameter'));
-        console.log(this.name);
+        //console.log($state.is('car'));
+        //console.log(this.name);
+        this.dataService=dataService;
+        
     }
     
 
 }
 
-const app = angular.module('app', ['ui.router']).controller('Controller2', Controller2) 
+const app = angular.module('app', ['ui.router'])
+.controller('Controller2', Controller2)
+.service('DataService', DataService) 
     .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) 
     {
 
@@ -60,9 +65,9 @@ const app = angular.module('app', ['ui.router']).controller('Controller2', Contr
                 template: '<div class="well"><h4>Child state</h4></div>'
             });
 
-        $stateProvider.state('parameter', {
-            url: '/parameter/:name',
-            template: '<h1>Parameter state with a name parameter</h1><p>Name is : {{ vm.name }}</p><p>{{vm.data[name]}}</p>',
+        $stateProvider.state('car', {
+            url: '/car/:name',
+            template: '<h1>car state with a name {{vm.dataService.$rootScope.bar.name}}</h1><p>Details are: {{ vm.dataService.$rootScope.bar }}</p><p><img data-ng-src="{{$mainCtrl.dataService.$rootScope.bar.image}}"></p>',
             controller: MainController,
             controllerAs: 'vm'
             
