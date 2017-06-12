@@ -67,7 +67,7 @@ const app = angular.module('app', ['ui.router'])
 
         $stateProvider.state('car', {
             url: '/car/:name',
-            template: '<h1>car state with a name {{vm.dataService.$rootScope.bar.name}}</h1><p>Details are: {{ vm.dataService.$rootScope.bar }}</p><p><img data-ng-src="{{$mainCtrl.dataService.$rootScope.bar.image}}"></p>',
+            template: '<h1>car state with a name {{vm.dataService.currentcar.name}}</h1><p>Details are: barr:{{ vm.dataService.currentcar }}</p><p><img data-ng-src="{{$mainCtrl.dataService.currentcar.image}}"></p>',
             controller: MainController,
             controllerAs: 'vm'
             

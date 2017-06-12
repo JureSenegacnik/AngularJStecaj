@@ -27,19 +27,12 @@ export class Controller2 {
             );
     }
     postHttp(selectedRental, mail){ 
-        
-        
-        
-        
         let postObject = {
             email: mail,
             timeslotId: selectedRental
         };
 
 
-        //alert(postObject);
-        //alert(mail);
-        //this.timeslots[selectedRental].contactEmail;
         this.$http.post('http://smartninja.betoo.si/api/CMW/reservations', postObject)
             .then((success: any) => {
                     console.log(success);
@@ -52,10 +45,6 @@ export class Controller2 {
     }
     view(selectedCar )
     {
-        //console.log(selectedCar);
-        //this.dataService.show(this.data, selectedCar);
-        //console.log('foo');
-        //console.log(this.data[selectedCar]);
         this.dataService.show(this.data, selectedCar);
         
     }
@@ -63,19 +52,17 @@ export class Controller2 {
 
 export class DataService
 {
-    public bar = [];//'Hello from DataService';
-    static $inject = ['$q', '$http','$rootScope' ];
-    
+  
+    static $inject = ['$q', '$http', ];
+    public currentcar=[];
     public tasks='';
-    constructor(private $q: ng.IQService, private $http: ng.IHttpService,private $rootScope: ng.IRootScopeService)
+    constructor(private $q: ng.IQService, private $http: ng.IHttpService,)
     {
-        this.$rootScope = $rootScope;
-        this.$rootScope.bar=[];"Nothing Yet";
+        this.currentcar=['no car selecte yet'];
     }
     show (data, name:string)
     {
-
-        this.$rootScope.bar=data[Number(name)-1];
+        this.currentcar=data[Number(name)-1];
         console.log(data[Number(name)-1]);
 }
 }
